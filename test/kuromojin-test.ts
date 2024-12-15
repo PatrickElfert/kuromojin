@@ -51,5 +51,16 @@ describe("kuromojin", function () {
                 assert.strictEqual(lastToken.word_position, 12);
             });
         });
+        it("should not mutate cache tokens when original tokens are modified", function () {
+            return tokenize("これは1文。これは2文。").then((tokens) => {
+                const numberOfTokens = tokens.length;
+
+                tokens.splice(0, tokens.length);
+
+                return tokenize("これは1文。これは2文。").then((tokensFromCache) => {
+                    assert.equal(numberOfTokens, tokensFromCache.length);
+                });
+            });
+        });
     });
 });

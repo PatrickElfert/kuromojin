@@ -106,7 +106,7 @@ export function tokenize(text: string, options?: getTokenizerOption): Promise<Ku
                 return cache;
             }
             const tokens = tokenizer.tokenizeForSentence(text);
-            tokenizeCacheMap.set(text, tokens);
+            tokenizeCacheMap.set(text, [...tokens]);
             return tokens;
         }
     });
